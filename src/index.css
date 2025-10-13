@@ -169,7 +169,7 @@ All colors MUST be HSL.
 }
 
 .hero-content {
-  position: fixed;
+  position: absolute;
   bottom: 20vh;
   left: 50%;
   transform: translateX(-50%);
