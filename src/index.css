@@ -170,7 +170,7 @@ All colors MUST be HSL.
 
 .hero-content {
   position: fixed;
-  bottom: 10vh;
+  bottom: 20vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
@@ -208,7 +208,8 @@ All colors MUST be HSL.
 }
 
 .hero-subtitle {
-  margin-top: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px;
   font-size: clamp(16px, 2vw, 24px);
   font-weight: 300;
   letter-spacing: 0.05em;
@@ -227,7 +228,7 @@ All colors MUST be HSL.
 
 .scroll-progress {
   position: fixed;
-  bottom: 60px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
