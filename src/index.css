@@ -101,5 +101,194 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    margin: 0;
+    overflow-x: hidden;
+  }
+}
+
+/* Horizon Hero Section Styles */
+.hero-container {
+  position: relative;
+  width: 100%;
+  min-height: 300vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.cosmos-style {
+  background: linear-gradient(to bottom, #000000 0%, #0a0a1a 50%, #000000 100%);
+}
+
+.hero-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.side-menu {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.menu-icon {
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  width: 100%;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.menu-icon:hover span {
+  background: #888;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+}
+
+.hero-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  text-align: center;
+  width: 90%;
+  max-width: 1200px;
+  pointer-events: none;
+}
+
+.cosmos-content {
+  color: white;
+}
+
+.hero-title {
+  font-size: clamp(60px, 12vw, 180px);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin: 0;
+  line-height: 0.9;
+  overflow: hidden;
+  display: inline-block;
+  background: linear-gradient(to bottom, #ffffff 0%, #aaaaaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-char {
+  display: inline-block;
+}
+
+.hero-subtitle {
+  margin-top: 40px;
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.cosmos-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.subtitle-line {
+  margin: 8px 0;
+  overflow: hidden;
+}
+
+.scroll-progress {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.scroll-text {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+}
+
+.progress-track {
+  width: 100px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: white;
+  transition: width 0.1s ease-out;
+}
+
+.section-counter {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  font-family: monospace;
+}
+
+.scroll-sections {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.content-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .side-menu {
+    left: 20px;
+  }
+  
+  .hero-title {
+    font-size: clamp(40px, 15vw, 100px);
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(14px, 3vw, 18px);
+  }
+  
+  .scroll-progress {
+    bottom: 40px;
   }
 }
