@@ -580,15 +580,12 @@ export const Component = () => {
       {/* Main content */}
       <div className="hero-content cosmos-content">
         <h1 ref={titleRef} className="hero-title">
-          HORIZON
+          MARKET FLOW
         </h1>
         
         <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle">
           <p className="subtitle-line">
-            Where vision meets reality, 
-          </p>
-          <p className="subtitle-line">
-            we shape the future of tomorrow
+            Unlock real-time insights with OI, VDelta, and CVD.
           </p>
         </div>
       </div>
@@ -611,23 +608,23 @@ export const Component = () => {
       <div className="scroll-sections">
        {[...Array(2)].map((_, i) => {
           const titles: Record<number, string> = {
-            0: 'HORIZON',
-            1: 'COSMOS',
-            2: 'INFINITY'
+            0: 'MARKET FLOW',
+            1: 'ALPHALABS',
+            2: 'DEPTH'
           };
           
           const subtitles: Record<number, { line1: string; line2: string }> = {
             0: {
-              line1: 'Where vision meets reality,',
-              line2: 'we shape the future of tomorrow'
+              line1: 'Unlock real-time insights with OI, VDelta, and CVD.',
+              line2: ''
             },
             1: {
-              line1: 'Beyond the boundaries of imagination,',
-              line2: 'lies the universe of possibilities'
+              line1: 'Where data drives decisions',
+              line2: 'Empowering traders with real-time market flow analytics'
             },
             2: {
-              line1: 'In the space between thought and creation,',
-              line2: 'we find the essence of true innovation'
+              line1: 'Go beyond the surface',
+              line2: 'Uncover hidden market trends with advanced analytics'
             }
           };
           
