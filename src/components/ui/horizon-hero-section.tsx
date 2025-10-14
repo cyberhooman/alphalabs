@@ -440,21 +440,11 @@ export const Component = () => {
     if (!isReady) return;
     
     // Set initial states to prevent flash
-    gsap.set([menuRef.current, titleRef.current, subtitleRef.current, scrollProgressRef.current], {
+    gsap.set([titleRef.current, subtitleRef.current, scrollProgressRef.current], {
       visibility: 'visible'
     });
 
     const tl = gsap.timeline();
-
-    // Animate menu
-    if (menuRef.current) {
-      tl.from(menuRef.current, {
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      });
-    }
 
     // Animate title with split text
     if (titleRef.current) {
@@ -567,15 +557,6 @@ export const Component = () => {
     <div ref={containerRef} className="hero-container cosmos-style">
       <canvas ref={canvasRef} className="hero-canvas" />
       
-      {/* Side menu */}
-      <div ref={menuRef} className="side-menu" style={{ visibility: 'hidden' }}>
-        <div className="menu-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div className="vertical-text">SPACE</div>
-      </div>
 
       {/* Main content */}
       <div className="hero-content cosmos-content">
@@ -585,7 +566,7 @@ export const Component = () => {
         
         <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle">
           <p className="subtitle-line">
-            Unlock real-time insights with OI, VDelta, and CVD.
+            Real-time analytics that give traders an edge.
           </p>
         </div>
       </div>
@@ -607,20 +588,20 @@ export const Component = () => {
       {/* Additional sections for scrolling */}
       <div className="scroll-sections">
        {[...Array(2)].map((_, i) => {
-          const titles: Record<number, string> = {
+           const titles: Record<number, string> = {
             0: 'MARKET FLOW',
-            1: 'ALPHALABS',
+            1: 'BEFORE → AFTER',
             2: 'DEPTH'
           };
           
-          const subtitles: Record<number, { line1: string; line2: string }> = {
+           const subtitles: Record<number, { line1: string; line2: string }> = {
             0: {
-              line1: 'Unlock real-time insights with OI, VDelta, and CVD.',
+              line1: 'Real-time analytics that give traders an edge.',
               line2: ''
             },
             1: {
-              line1: 'Where data drives decisions',
-              line2: 'Empowering traders with real-time market flow analytics'
+              line1: 'Before: Noisy technical analysis, cluttered charts, missed signals',
+              line2: 'After: Clear market flow with CVD, OI, vDelta, and funding rates'
             },
             2: {
               line1: 'Go beyond the surface',
