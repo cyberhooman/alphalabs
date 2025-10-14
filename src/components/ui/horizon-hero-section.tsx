@@ -599,8 +599,8 @@ export const Component = () => {
               line2: ''
             },
             1: {
-              line1: 'Where data drives decisions',
-              line2: 'Empowering traders with real-time market flow analytics'
+              line1: 'Real-time analytics that give traders an edge',
+              line2: ''
             },
             2: {
               line1: 'Go beyond the surface',
