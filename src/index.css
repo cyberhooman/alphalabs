@@ -113,8 +113,6 @@ All colors MUST be HSL.
   min-height: 300vh;
   overflow: hidden;
   background: #000;
-  padding-top: 0;
-  margin-top: 0;
 }
 
 .cosmos-style {
@@ -130,6 +128,45 @@ All colors MUST be HSL.
   z-index: 1;
 }
 
+.side-menu {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.menu-icon {
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  width: 100%;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.menu-icon:hover span {
+  background: #888;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+}
 
 .hero-content {
   position: absolute;
@@ -246,6 +283,10 @@ All colors MUST be HSL.
 }
 
 @media (max-width: 768px) {
+  .side-menu {
+    left: 20px;
+  }
+  
   .hero-title {
     font-size: clamp(40px, 15vw, 100px);
   }
