@@ -194,7 +194,8 @@ All colors MUST be HSL.
   margin: 0;
   line-height: 0.9;
   overflow: hidden;
-  display: inline-block;
+  display: block;
+  text-align: center;
   color: #FF6B6B;
   text-shadow: 0 0 30px rgba(255, 107, 107, 0.6), 0 0 60px rgba(255, 107, 107, 0.4);
   transition: all 0.3s ease;
@@ -292,10 +293,20 @@ All colors MUST be HSL.
   
   .hero-title {
     font-size: clamp(40px, 15vw, 100px);
+    letter-spacing: 0.05em;
+    text-align: center;
+    width: 100%;
   }
   
   .hero-subtitle {
     font-size: clamp(14px, 3vw, 18px);
+    text-align: center;
+    width: 100%;
+  }
+  
+  .hero-content {
+    width: 95%;
+    padding: 0 10px;
   }
   
   .scroll-progress {

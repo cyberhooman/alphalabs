@@ -109,13 +109,25 @@ export const Component = () => {
         const sizes = new Float32Array(starCount);
 
         for (let j = 0; j < starCount; j++) {
-          const radius = 200 + Math.random() * 800;
-          const theta = Math.random() * Math.PI * 2;
-          const phi = Math.acos(Math.random() * 2 - 1);
+          // Use more even distribution across the view space
+          // Mix spherical and rectangular distribution for better coverage
+          const useSpherical = Math.random() > 0.3;
+          
+          if (useSpherical) {
+            // Spherical distribution for depth
+            const radius = 200 + Math.random() * 800;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(Math.random() * 2 - 1);
 
-          positions[j * 3] = radius * Math.sin(phi) * Math.cos(theta);
-          positions[j * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-          positions[j * 3 + 2] = radius * Math.cos(phi);
+            positions[j * 3] = radius * Math.sin(phi) * Math.cos(theta);
+            positions[j * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            positions[j * 3 + 2] = radius * Math.cos(phi);
+          } else {
+            // Rectangular distribution for even viewport coverage
+            positions[j * 3] = (Math.random() - 0.5) * 2000;
+            positions[j * 3 + 1] = (Math.random() - 0.5) * 1500;
+            positions[j * 3 + 2] = -Math.random() * 1200;
+          }
 
           // Color variation
           const color = new THREE.Color();
@@ -566,14 +578,16 @@ export const Component = () => {
       
       {/* Main content */}
       <div className="hero-content cosmos-content">
-        <h1 ref={titleRef} className="hero-title">
-          MARKET FLOW
-        </h1>
-        
-        <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle">
-          <p className="subtitle-line">
-            Unlock real-time insights with OI, VDelta, and CVD.
-          </p>
+        <div className="flex flex-col items-center w-full">
+          <h1 ref={titleRef} className="hero-title">
+            MARKET FLOW
+          </h1>
+          
+          <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle">
+            <p className="subtitle-line">
+              Unlock real-time insights with OI, VDelta, and CVD.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -617,24 +631,26 @@ export const Component = () => {
           
           return (
             <section key={i} className="content-section">
-              <h1 className="hero-title">
-                {titles[i+1] || 'DEFAULT'}
-              </h1>
-          
-              <div className="hero-subtitle cosmos-subtitle flex flex-col items-center">
-                <p className="subtitle-line">
-                  {subtitles[i+1].line1}
-                </p>
-                <p className="subtitle-line">
-                  {subtitles[i+1].line2}
-                </p>
-                {i === 0 && (
-                  <Button 
-                    className="mt-8 bg-[#FF6B6B] hover:bg-[#FF5252] text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg shadow-[#FF6B6B]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#FF6B6B]/50"
-                  >
-                    Get Early Access
-                  </Button>
-                )}
+              <div className="flex flex-col items-center w-full px-4">
+                <h1 className="hero-title">
+                  {titles[i+1] || 'DEFAULT'}
+                </h1>
+            
+                <div className="hero-subtitle cosmos-subtitle flex flex-col items-center">
+                  <p className="subtitle-line">
+                    {subtitles[i+1].line1}
+                  </p>
+                  <p className="subtitle-line">
+                    {subtitles[i+1].line2}
+                  </p>
+                  {i === 0 && (
+                    <Button 
+                      className="mt-8 bg-[#FF6B6B] hover:bg-[#FF5252] text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg shadow-[#FF6B6B]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#FF6B6B]/50"
+                    >
+                      Get Early Access
+                    </Button>
+                  )}
+                </div>
               </div>
             </section>
           );
