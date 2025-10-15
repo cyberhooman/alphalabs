@@ -621,7 +621,7 @@ export const Component = () => {
                 {titles[i+1] || 'DEFAULT'}
               </h1>
           
-              <div className="hero-subtitle cosmos-subtitle">
+              <div className="hero-subtitle cosmos-subtitle flex flex-col items-center">
                 <p className="subtitle-line">
                   {subtitles[i+1].line1}
                 </p>
