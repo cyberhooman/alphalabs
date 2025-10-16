@@ -193,7 +193,6 @@ All colors MUST be HSL.
   letter-spacing: 0.1em;
   margin: 0;
   line-height: 0.9;
-  overflow: hidden;
   display: block;
   text-align: center;
   color: #FF6B6B;
@@ -292,10 +291,11 @@ All colors MUST be HSL.
   }
   
   .hero-title {
-    font-size: clamp(40px, 15vw, 100px);
-    letter-spacing: 0.05em;
+    font-size: clamp(35px, 13vw, 100px);
+    letter-spacing: 0.02em;
     text-align: center;
     width: 100%;
+    padding: 0 10px;
   }
   
   .hero-subtitle {
