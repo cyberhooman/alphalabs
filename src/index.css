@@ -220,8 +220,8 @@ All colors MUST be HSL.
 }
 
 .cosmos-subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
 .subtitle-line {
@@ -299,7 +299,8 @@ All colors MUST be HSL.
   }
   
   .hero-subtitle {
-    font-size: clamp(14px, 3vw, 18px);
+    font-size: clamp(16px, 4vw, 22px);
+    font-weight: 400;
     text-align: center;
     width: 100%;
   }
