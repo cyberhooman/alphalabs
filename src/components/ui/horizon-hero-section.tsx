@@ -100,71 +100,51 @@ export const Component = () => {
 
     const createStarField = () => {
       const { current: refs } = threeRefs;
-
-      // Clear existing stars if any (for rebuilds like resize)
-      if (refs.stars && refs.stars.length) {
-        refs.stars.forEach((sf: any) => {
-          refs.scene.remove(sf);
-          sf.geometry.dispose();
-          sf.material.dispose();
-        });
-        refs.stars = [];
-      }
-
-      // Build evenly distributed stars based on camera frustum sizes at multiple depths
-      const layers = [
-        { z: -300, depth: 0 },
-        { z: -600, depth: 1 },
-        { z: -900, depth: 2 },
-      ];
-
-      const fovRad = (refs.camera.fov * Math.PI) / 180;
-      const aspect = refs.camera.aspect;
-
-      layers.forEach(({ z, depth }) => {
-        const dist = Math.abs(refs.camera.position.z - z);
-        const halfH = Math.tan(fovRad / 2) * dist; // world units
-        const halfW = halfH * aspect;
-
-        // Target ~80px cell size at this depth for even scattering
-        const worldPerPixelY = (halfH * 2) / window.innerHeight;
-        const cellSizeWorld = Math.max(worldPerPixelY * 80, 1e-3);
-        const cols = Math.max(1, Math.floor((halfW * 2) / cellSizeWorld));
-        const rows = Math.max(1, Math.floor((halfH * 2) / cellSizeWorld));
-
+      const starCount = 5000;
+      
+      for (let i = 0; i < 3; i++) {
         const geometry = new THREE.BufferGeometry();
-        const starCount = cols * rows;
         const positions = new Float32Array(starCount * 3);
         const colors = new Float32Array(starCount * 3);
         const sizes = new Float32Array(starCount);
 
-        let idx = 0;
-        const cellW = (halfW * 2) / cols;
-        const cellH = (halfH * 2) / rows;
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            const x0 = -halfW + c * cellW;
-            const y0 = -halfH + r * cellH;
-            const jitterX = (Math.random() - 0.5) * cellW;
-            const jitterY = (Math.random() - 0.5) * cellH;
+        for (let j = 0; j < starCount; j++) {
+          // Use more even distribution across the view space
+          // Mix spherical and rectangular distribution for better coverage
+          const useSpherical = Math.random() > 0.3;
+          
+          if (useSpherical) {
+            // Spherical distribution for depth
+            const radius = 200 + Math.random() * 800;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(Math.random() * 2 - 1);
 
-            positions[idx * 3] = x0 + cellW / 2 + jitterX * 0.6;
-            positions[idx * 3 + 1] = y0 + cellH / 2 + jitterY * 0.6;
-            positions[idx * 3 + 2] = z;
-
-            // Color variation (subtle)
-            const color = new THREE.Color();
-            const choice = Math.random();
-            if (choice < 0.7) color.setHSL(0, 0, 0.85 + Math.random() * 0.15);
-            else if (choice < 0.9) color.setHSL(0.08, 0.5, 0.8);
-            else color.setHSL(0.6, 0.5, 0.8);
-            colors[idx * 3] = color.r;
-            colors[idx * 3 + 1] = color.g;
-            colors[idx * 3 + 2] = color.b;
-
-            sizes[idx] = Math.random() * 2 + 0.5;
-            idx++;
+            positions[j * 3] = radius * Math.sin(phi) * Math.cos(theta);
+            positions[j * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            positions[j * 3 + 2] = radius * Math.cos(phi);
+          } else {
+            // Rectangular distribution for even viewport coverage
+            positions[j * 3] = (Math.random() - 0.5) * 2000;
+            positions[j * 3 + 1] = (Math.random() - 0.5) * 1500;
+            positions[j * 3 + 2] = -Math.random() * 1200;
           }
+
+          // Color variation
+          const color = new THREE.Color();
+          const colorChoice = Math.random();
+          if (colorChoice < 0.7) {
+            color.setHSL(0, 0, 0.8 + Math.random() * 0.2);
+          } else if (colorChoice < 0.9) {
+            color.setHSL(0.08, 0.5, 0.8);
+          } else {
+            color.setHSL(0.6, 0.5, 0.8);
+          }
+          
+          colors[j * 3] = color.r;
+          colors[j * 3 + 1] = color.g;
+          colors[j * 3 + 2] = color.b;
+
+          sizes[j] = Math.random() * 2 + 0.5;
         }
 
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -174,7 +154,7 @@ export const Component = () => {
         const material = new THREE.ShaderMaterial({
           uniforms: {
             time: { value: 0 },
-            depth: { value: depth },
+            depth: { value: i }
           },
           vertexShader: `
             attribute float size;
@@ -210,13 +190,13 @@ export const Component = () => {
           `,
           transparent: true,
           blending: THREE.AdditiveBlending,
-          depthWrite: false,
+          depthWrite: false
         });
 
         const stars = new THREE.Points(geometry, material);
         refs.scene.add(stars);
         refs.stars.push(stars);
-      });
+      }
     };
 
     const createNebula = () => {
@@ -422,17 +402,6 @@ export const Component = () => {
         refs.camera.updateProjectionMatrix();
         refs.renderer.setSize(window.innerWidth, window.innerHeight);
         refs.composer.setSize(window.innerWidth, window.innerHeight);
-
-        // Rebuild stars to maintain even distribution for new aspect ratio
-        if (refs.stars && refs.stars.length) {
-          refs.stars.forEach((sf: any) => {
-            refs.scene.remove(sf);
-            sf.geometry.dispose();
-            sf.material.dispose();
-          });
-          refs.stars = [];
-        }
-        createStarField();
       }
     };
 
@@ -610,11 +579,11 @@ export const Component = () => {
       {/* Main content */}
       <div className="hero-content cosmos-content">
         <div className="flex flex-col items-center w-full">
-          <h1 ref={titleRef} className="hero-title text-center mx-auto">
+          <h1 ref={titleRef} className="hero-title">
             MARKET FLOW
           </h1>
           
-          <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle text-center">
+          <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle">
             <p className="subtitle-line">
               Unlock real-time insights with OI, VDelta, and CVD.
             </p>
@@ -663,11 +632,11 @@ export const Component = () => {
           return (
             <section key={i} className="content-section">
               <div className="flex flex-col items-center w-full px-4">
-                <h1 className="hero-title text-center mx-auto">
+                <h1 className="hero-title">
                   {titles[i+1] || 'DEFAULT'}
                 </h1>
             
-                <div className="hero-subtitle cosmos-subtitle flex flex-col items-center text-center">
+                <div className="hero-subtitle cosmos-subtitle flex flex-col items-center">
                   <p className="subtitle-line">
                     {subtitles[i+1].line1}
                   </p>
