@@ -632,7 +632,7 @@ export const Component = () => {
           return (
             <section key={i} className="content-section">
               <div className="flex flex-col items-center w-full px-4">
-                <h1 className={`hero-title ${titles[i+1] === 'ALPHALABS' ? 'text-[clamp(35px,7vw,100px)]' : ''}`}>
+                <h1 className="hero-title">
                   {titles[i+1] || 'DEFAULT'}
                 </h1>
             
