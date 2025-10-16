@@ -631,8 +631,8 @@ export const Component = () => {
           
           return (
             <section key={i} className="content-section">
-              <div className="flex flex-col items-center w-full px-4">
-                <h1 className="hero-title">
+              <div className="flex flex-col items-center w-full px-8">
+                <h1 className="hero-title text-center max-w-full overflow-hidden">
                   {titles[i+1] || 'DEFAULT'}
                 </h1>
             
