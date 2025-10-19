@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Button } from '@/components/ui/button';
+import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
@@ -644,11 +644,10 @@ export const Component = () => {
                     {subtitles[i+1].line2}
                   </p>
                   {i === 0 && (
-                    <Button 
-                      className="mt-8 bg-[#FF6B6B] hover:bg-[#FF5252] text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg shadow-[#FF6B6B]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#FF6B6B]/50"
-                    >
-                      Get Early Access
-                    </Button>
+                    <InteractiveHoverButton 
+                      text="Get Early Access"
+                      className="mt-8 w-auto px-8 py-6 text-lg bg-[#FF6B6B] border-[#FF6B6B] hover:bg-[#FF5252]"
+                    />
                   )}
                 </div>
               </div>
