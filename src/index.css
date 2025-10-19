@@ -276,6 +276,10 @@ All colors MUST be HSL.
   pointer-events: none;
 }
 
+.scroll-sections button {
+  pointer-events: auto;
+}
+
 .content-section {
   height: 100vh;
   display: flex;
