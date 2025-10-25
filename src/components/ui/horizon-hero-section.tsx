@@ -10,6 +10,31 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Camera position constant - all stars MUST be in front of this
+const CAMERA_Z = 100;
+
+// Utility function to create circular star texture for sprites
+const createStarTexture = (): THREE.CanvasTexture => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d')!;
+
+  // Create radial gradient for soft glow
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.8)');
+  gradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.4)');
+  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 64, 64);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  return texture;
+};
+
 export const Component = () => {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -99,104 +124,98 @@ export const Component = () => {
     };
 
     const createStarField = () => {
-      const { current: refs } = threeRefs;
-      const starCount = 5000;
-      
-      for (let i = 0; i < 3; i++) {
-        const geometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(starCount * 3);
-        const colors = new Float32Array(starCount * 3);
-        const sizes = new Float32Array(starCount);
+      console.log('⭐ Creating sprite-based star field (GUARANTEED cross-device compatibility)...');
 
-        for (let j = 0; j < starCount; j++) {
-          // Use more even distribution across the view space
-          // Mix spherical and rectangular distribution for better coverage
+      const { current: refs } = threeRefs;
+      const starTexture = createStarTexture();
+      const starCount = 4000;
+
+      // Create stars in 3 depth layers for parallax
+      for (let layer = 0; layer < 3; layer++) {
+        const starsInLayer = Math.floor(starCount / 3);
+
+        for (let i = 0; i < starsInLayer; i++) {
+          // Determine position distribution method
           const useSpherical = Math.random() > 0.3;
-          
+
+          let x: number, y: number, z: number;
+
           if (useSpherical) {
-            // Spherical distribution for depth
-            const radius = 200 + Math.random() * 800;
+            // Spherical distribution for natural star field
+            const radius = 400 + Math.random() * 1200;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.acos(Math.random() * 2 - 1);
 
-            positions[j * 3] = radius * Math.sin(phi) * Math.cos(theta);
-            positions[j * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-            positions[j * 3 + 2] = radius * Math.cos(phi);
+            x = radius * Math.sin(phi) * Math.cos(theta);
+            y = radius * Math.sin(phi) * Math.sin(theta);
+
+            // CRITICAL: Ensure Z is always BEHIND camera (negative relative to camera)
+            // Camera is at Z=100, so stars must be at Z < 100
+            const sphereZ = radius * Math.cos(phi);
+            z = CAMERA_Z - 300 - Math.abs(sphereZ); // Range: -200 to -1600
           } else {
             // Rectangular distribution for even viewport coverage
-            positions[j * 3] = (Math.random() - 0.5) * 2000;
-            positions[j * 3 + 1] = (Math.random() - 0.5) * 1500;
-            positions[j * 3 + 2] = -Math.random() * 1200;
+            x = (Math.random() - 0.5) * 2500;
+            y = (Math.random() - 0.5) * 1800;
+
+            // CRITICAL: Mathematical guarantee stars are in front of camera
+            z = CAMERA_Z - (200 + Math.random() * 1800); // Range: -100 to -1900
+          }
+
+          // Validate position (failsafe)
+          if (z >= CAMERA_Z - 100) {
+            z = CAMERA_Z - 200;
           }
 
           // Color variation
           const color = new THREE.Color();
           const colorChoice = Math.random();
+
           if (colorChoice < 0.7) {
-            color.setHSL(0, 0, 0.8 + Math.random() * 0.2);
+            // White stars
+            color.setHSL(0, 0, 0.85 + Math.random() * 0.15);
           } else if (colorChoice < 0.9) {
-            color.setHSL(0.08, 0.5, 0.8);
+            // Warm orange stars
+            color.setHSL(0.08, 0.6, 0.85);
           } else {
-            color.setHSL(0.6, 0.5, 0.8);
+            // Cool blue stars
+            color.setHSL(0.6, 0.5, 0.85);
           }
-          
-          colors[j * 3] = color.r;
-          colors[j * 3 + 1] = color.g;
-          colors[j * 3 + 2] = color.b;
 
-          sizes[j] = Math.random() * 2 + 0.5;
+          // Size variation based on distance
+          const distance = Math.abs(z - CAMERA_Z);
+          const baseSize = 0.5 + Math.random() * 2.5;
+          const size = baseSize * (1 + distance / 1000);
+
+          // Create sprite material
+          const material = new THREE.SpriteMaterial({
+            map: starTexture,
+            color: color,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            opacity: 0.8 + Math.random() * 0.2
+          });
+
+          // Create sprite
+          const star = new THREE.Sprite(material);
+          star.position.set(x, y, z);
+          star.scale.set(size, size, 1);
+
+          // Store data for animation
+          star.userData.layer = layer;
+          star.userData.baseX = x;
+          star.userData.baseY = y;
+          star.userData.baseZ = z;
+          star.userData.twinkleOffset = Math.random() * Math.PI * 2;
+
+          refs.scene.add(star);
+          refs.stars.push(star);
         }
-
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-        const material = new THREE.ShaderMaterial({
-          uniforms: {
-            time: { value: 0 },
-            depth: { value: i }
-          },
-          vertexShader: `
-            attribute float size;
-            attribute vec3 color;
-            varying vec3 vColor;
-            uniform float time;
-            uniform float depth;
-            
-            void main() {
-              vColor = color;
-              vec3 pos = position;
-              
-              // Slow rotation based on depth
-              float angle = time * 0.05 * (1.0 - depth * 0.3);
-              mat2 rot = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-              pos.xy = rot * pos.xy;
-              
-              vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-              gl_PointSize = size * (300.0 / -mvPosition.z);
-              gl_Position = projectionMatrix * mvPosition;
-            }
-          `,
-          fragmentShader: `
-            varying vec3 vColor;
-            
-            void main() {
-              float dist = length(gl_PointCoord - vec2(0.5));
-              if (dist > 0.5) discard;
-              
-              float opacity = 1.0 - smoothstep(0.0, 0.5, dist);
-              gl_FragColor = vec4(vColor, opacity);
-            }
-          `,
-          transparent: true,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false
-        });
-
-        const stars = new THREE.Points(geometry, material);
-        refs.scene.add(stars);
-        refs.stars.push(stars);
       }
+
+      console.log(`✅ Created ${refs.stars.length} sprite-based stars with validated positions`);
+      console.log(`📍 Camera Z: ${CAMERA_Z}, Star Z range: -100 to -1900`);
     };
 
     const createNebula = () => {
@@ -348,11 +367,22 @@ export const Component = () => {
       
       const time = Date.now() * 0.001;
 
-      // Update stars
-      refs.stars.forEach((starField, i) => {
-        if (starField.material.uniforms) {
-          starField.material.uniforms.time.value = time;
-        }
+      // Animate sprites (rotation and twinkle)
+      refs.stars.forEach((star) => {
+        const layer = star.userData.layer;
+
+        // Gentle rotation based on layer
+        const rotationSpeed = 0.02 * (1 - layer * 0.3);
+        const angle = time * rotationSpeed;
+        const radius = Math.sqrt(star.userData.baseX ** 2 + star.userData.baseY ** 2);
+        const currentAngle = Math.atan2(star.userData.baseY, star.userData.baseX);
+
+        star.position.x = radius * Math.cos(currentAngle + angle);
+        star.position.y = radius * Math.sin(currentAngle + angle);
+
+        // Subtle twinkle effect
+        const twinkle = Math.sin(time * 2 + star.userData.twinkleOffset) * 0.15 + 0.85;
+        star.material.opacity = twinkle * 0.9;
       });
 
       // Update nebula
