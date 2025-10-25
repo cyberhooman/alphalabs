@@ -1,0 +1,442 @@
+/* ============================================
+   3D Horizon Hero Section - Cross-Device Styles
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hero-container-3d {
+  position: relative;
+  width: 100%;
+  min-height: 300vh; /* 3 sections worth of scrolling */
+  background: #000;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+/* Canvas (Three.js) */
+.hero-canvas-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: linear-gradient(to bottom, #000000 0%, #0a0a1a 50%, #1a0a2e 100%);
+}
+
+/* Side Menu */
+.side-menu-3d {
+  position: fixed;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.menu-icon-3d {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menu-icon-3d span {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.menu-icon-3d:hover span {
+  background: rgba(255, 255, 255, 1);
+}
+
+.vertical-text-3d {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 14px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+/* Main Content */
+.hero-content-3d {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  pointer-events: none;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.hero-title-3d {
+  font-size: clamp(60px, 12vw, 180px);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 40px rgba(255, 100, 200, 0.3),
+    0 0 60px rgba(100, 150, 255, 0.2);
+  line-height: 1;
+  margin-bottom: 40px;
+  perspective: 1000px;
+}
+
+.title-char {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.hero-title-3d:hover .title-char {
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero-title-3d .title-char:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.hero-title-3d .title-char:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hero-subtitle-3d {
+  font-size: clamp(16px, 2vw, 24px);
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subtitle-line {
+  margin: 8px 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Scroll Progress Indicator */
+.scroll-progress-3d {
+  position: fixed;
+  bottom: 60px;
+  right: 60px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.scroll-text-3d {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.progress-track-3d {
+  width: 2px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill-3d {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 100, 200, 1),
+    rgba(100, 150, 255, 1)
+  );
+  transition: height 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 100, 200, 0.6);
+}
+
+.section-counter-3d {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  font-family: 'Courier New', monospace;
+}
+
+/* Scroll Sections */
+.scroll-sections-3d {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.content-section-3d {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.section-title-3d {
+  margin-bottom: 30px;
+}
+
+/* Glassmorphism effects */
+.hero-content-3d::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.03) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .side-menu-3d {
+    left: 20px;
+  }
+
+  .scroll-progress-3d {
+    bottom: 40px;
+    right: 40px;
+  }
+
+  .hero-title-3d {
+    font-size: clamp(50px, 10vw, 120px);
+  }
+
+  .hero-subtitle-3d {
+    font-size: clamp(14px, 1.8vw, 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .side-menu-3d {
+    left: 15px;
+    gap: 30px;
+  }
+
+  .menu-icon-3d {
+    width: 25px;
+    height: 25px;
+  }
+
+  .vertical-text-3d {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .scroll-progress-3d {
+    bottom: 30px;
+    right: 20px;
+    gap: 10px;
+  }
+
+  .progress-track-3d {
+    height: 80px;
+  }
+
+  .hero-title-3d {
+    font-size: clamp(40px, 12vw, 80px);
+    margin-bottom: 25px;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-subtitle-3d {
+    font-size: clamp(13px, 2.5vw, 18px);
+    padding: 0 20px;
+  }
+
+  .subtitle-line {
+    margin: 6px 0;
+  }
+
+  .scroll-text-3d {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .section-counter-3d {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container-3d {
+    min-height: 250vh; /* Slightly shorter on very small screens */
+  }
+
+  .side-menu-3d {
+    left: 10px;
+    gap: 25px;
+  }
+
+  .menu-icon-3d {
+    width: 20px;
+    height: 20px;
+  }
+
+  .vertical-text-3d {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .scroll-progress-3d {
+    bottom: 20px;
+    right: 15px;
+    gap: 8px;
+  }
+
+  .progress-track-3d {
+    height: 60px;
+  }
+
+  .hero-title-3d {
+    font-size: clamp(32px, 14vw, 60px);
+    margin-bottom: 20px;
+    letter-spacing: 0.06em;
+  }
+
+  .hero-subtitle-3d {
+    font-size: clamp(12px, 3vw, 16px);
+    padding: 0 15px;
+  }
+
+  .scroll-text-3d {
+    font-size: 9px;
+  }
+
+  .section-counter-3d {
+    font-size: 11px;
+  }
+}
+
+/* High DPI / Retina Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero-title-3d {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .hero-subtitle-3d {
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Dark mode support (if needed) */
+@media (prefers-color-scheme: dark) {
+  .hero-canvas-3d {
+    background: linear-gradient(to bottom, #000000 0%, #0a0a1a 50%, #1a0a2e 100%);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .title-char,
+  .progress-fill-3d,
+  .menu-icon-3d span {
+    transition: none;
+  }
+
+  .hero-title-3d:hover .title-char {
+    animation: none;
+  }
+}
+
+/* Performance optimizations */
+.hero-canvas-3d,
+.hero-content-3d,
+.side-menu-3d,
+.scroll-progress-3d {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Loading state */
+.hero-container-3d.loading {
+  background: #000;
+}
+
+.hero-container-3d.loading .hero-canvas-3d {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hero-container-3d.loaded .hero-canvas-3d {
+  opacity: 1;
+}
+
+/* Scrollbar styling (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(255, 100, 200, 0.3);
+  color: #fff;
+}
+
+::-moz-selection {
+  background: rgba(255, 100, 200, 0.3);
+  color: #fff;
+}
