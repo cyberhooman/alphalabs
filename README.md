@@ -1,73 +1,110 @@
-# Welcome to your Lovable project
+# 🧪 **Alphalabs — Terminal-First Crypto Futures Intelligence**
 
-## Project info
+Alphalabs is a high-performance, terminal-based analytics platform that brings **institutional-grade futures market data** to every trader. Track **CVD (Cumulative Volume Delta)**, liquidation heatmaps, open interest flows, funding trends, and more — in real time, from the command line.
 
-**URL**: https://lovable.dev/projects/24f52ce4-a341-45ef-bb58-8f5eaf8c10cb
+Built for **speed**, **precision**, and **alpha extraction**.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🚀 Key Capabilities
 
-**Use Lovable**
+- 📈 **CVD Visualization**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/24f52ce4-a341-45ef-bb58-8f5eaf8c10cb) and start prompting.
+  - Track aggressive buyers vs sellers
+  - Spot absorption, exhaustion, and imbalances early
 
-Changes made via Lovable will be committed automatically to this repo.
+- 🏦 **Open Interest + Funding Data**
 
-**Use your preferred IDE**
+  - Detect leverage expansion + directional bias shifts
+  - Stay ahead of squeezes and unwind cascades
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- 🔥 **Liquidation Heatmaps**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+  - See liquidation clusters before the candle prints
 
-Follow these steps:
+- 🌐 **Multi-Exchange Support**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+  - Full coverage for leading perpetual futures exchanges  
+    _(Binance, Bybit, OKX — more coming)_
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- ⚡ **Ultra-Fast Terminal UI**
+  - Designed for power traders and quants
+  - Minimal latency, maximal signal-to-noise
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 🎯 Built for Traders Who
 
-**Edit a file directly in GitHub**
+- scalp microstructure order-flow signals
+- trade liquid perpetuals and BTC/ETH dominance moves
+- analyze smart-money aggressions
+- automate edge-driven strategies
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+**Alpha comes from speed and clarity — not noise.**
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🧩 Tech Stack
 
-## What technologies are used for this project?
+- **Rust + TypeScript** powered core
+- **Real-time websockets feeds**
+- **Lightweight charting & TUI**
+- **Modular API for custom indicators**
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🔜 Coming Soon
 
-## How can I deploy this project?
+✅ Strategy scripting & automated alerts  
+✅ DOM / Order Book imbalance tracking  
+✅ Smart money footprint detection  
+✅ Cloud-synced layouts & preferences  
+✅ Plugin model for custom signals
 
-Simply open [Lovable](https://lovable.dev/projects/24f52ce4-a341-45ef-bb58-8f5eaf8c10cb) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 💡 Vision
 
-Yes, you can!
+> Give retail the same microstructure edge institutions use —  
+> with a terminal that _actually feels like trading_.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Alphalabs is built with a singular mission:
+**uncover directional conviction before the market does.**
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+## 🧪 Early Access
+
+We are currently onboarding early testers.  
+Join the waitlist for access:
+
+📩 **https://alphalabs.xyz**  
+_(coming soon — join early to secure your spot)_
+
+---
+
+## 🤝 Join the Lab
+
+We're actively looking for early traders, researchers, and collaborators.  
+If you want to help shape the future of crypto futures analytics — let’s build together.
+
+---
+
+### ⭐ Support the Project
+
+If you believe in what we’re building:
+
+- Drop a ⭐ on GitHub
+- Share Alphalabs with another trader
+- Give us feedback & feature requests
+
+---
+
+### 📜 License
+
+Released under the **BUSL-1.1** license.  
+Commercial usage requires an agreement.
+
+---
+
+Made with ⚡ and conviction — by **Alphalabs**
