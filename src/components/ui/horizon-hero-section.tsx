@@ -173,7 +173,9 @@ export const Component = () => {
               pos.xy = rot * pos.xy;
               
               vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-              gl_PointSize = size * (300.0 / -mvPosition.z);
+              float pointSize = size * (300.0 / -mvPosition.z);
+              pointSize = min(max(pointSize, 1.5), 80.0);
+              gl_PointSize = pointSize;
               gl_Position = projectionMatrix * mvPosition;
             }
           `,
