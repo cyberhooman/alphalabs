@@ -638,7 +638,7 @@ export const Component = () => {
         <div className="progress-track">
           <div 
             className="progress-fill" 
-            style={{ width: `${scrollProgress * 100}%` }}
+            style={{ height: `${scrollProgress * 100}%` }}
           />
         </div>
         <div className="section-counter">
@@ -652,7 +652,7 @@ export const Component = () => {
           const titles: Record<number, string> = {
             0: 'MARKET FLOW',
             1: 'ALPHALABS',
-            2: 'DEPTH'
+            2: 'PAIN POINT'
           };
           
           const subtitles: Record<number, { line1: string; line2: string }> = {
@@ -685,18 +685,67 @@ export const Component = () => {
                   )}
                 </h1>
             
-                <div className="hero-subtitle cosmos-subtitle flex flex-col items-center">
-                  <p className="subtitle-line">
-                    {subtitles[i+1].line1}
-                  </p>
-                  <p className="subtitle-line">
-                    {subtitles[i+1].line2}
-                  </p>
-                  {i === 0 && (
-                    <InteractiveHoverButton 
-                      text="Get Early Access"
-                      className="mt-8 w-auto px-8 py-6 text-lg bg-[#FF6B6B] border-[#FF6B6B] hover:bg-[#FF5252]"
-                    />
+                <div className="hero-subtitle cosmos-subtitle flex w-full flex-col items-center">
+                  {i === 0 ? (
+                    <>
+                      <p className="subtitle-line subtitle-line--primary">
+                        {subtitles[i+1].line1}
+                      </p>
+                      <p className="subtitle-line subtitle-line--primary">
+                        {subtitles[i+1].line2}
+                      </p>
+                      <p className="subtitle-line mt-2">
+                        Go beyond the surface.
+                      </p>
+                      <p className="subtitle-line">
+                        Uncover hidden market trends with advanced analytics.
+                      </p>
+                      <InteractiveHoverButton 
+                        text="Get Early Access"
+                        className="mt-8 w-auto px-8 py-6 text-lg bg-[#FF6B6B] border-[#FF6B6B] hover:bg-[#FF5252]"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      {titles[i+1] === 'ALPHALABS' && (
+                        <div className="alpha-subtitle-block">
+                          <p className="subtitle-line">
+                            Go beyond the surface
+                          </p>
+                          <p className="subtitle-line">
+                            Uncover hidden market trends with advanced analytics
+                          </p>
+                        </div>
+                      )}
+                      <p className="pain-card-subtitle text-center">
+                        Why trade with only technical analysis did not make you rich?
+                      </p>
+                      <div className="pain-card-grid">
+                      {[
+                        {
+                          title: "Lagging Data",
+                          body: "Signals arrive seconds late, so you’re reacting to the past instead of the next move.",
+                        },
+                        {
+                          title: "Noisy Indicators",
+                          body: "Stacks of conflicting indicators force you to guess which signal to trust.",
+                        },
+                        {
+                          title: "Fragmented Workflow",
+                          body: "You pivot between chats, charts, and sheets instead of executing on one command deck.",
+                        },
+                        {
+                          title: "Too Complex",
+                          body: "Technical analysis feels like a maze of theories—hard to master, harder to execute fast.",
+                        },
+                      ].map(({ title, body }) => (
+                        <div key={title} className="pain-card">
+                          <h4>{title}</h4>
+                          <p>{body}</p>
+                        </div>
+                      ))}
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
@@ -704,6 +753,7 @@ export const Component = () => {
           );
         })}
       </div>
+
     </div>
   );
 };

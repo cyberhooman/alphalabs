@@ -173,13 +173,12 @@ All colors MUST be HSL.
 
 .hero-content {
   position: absolute;
-  bottom: 20vh;
+  bottom: 18vh;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
   text-align: center;
-  width: 90%;
-  max-width: 1200px;
+  width: min(88%, 1000px);
   pointer-events: auto;
 }
 
@@ -229,16 +228,22 @@ All colors MUST be HSL.
   overflow: hidden;
 }
 
+.subtitle-line--primary {
+  font-size: clamp(18px, 2.4vw, 30px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
 .scroll-progress {
   position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 60px;
+  transform: translateY(-50%);
   z-index: 10;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 15px;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .scroll-text {
@@ -249,17 +254,19 @@ All colors MUST be HSL.
 }
 
 .progress-track {
-  width: 100px;
-  height: 2px;
+  width: 2px;
+  height: 120px;
   background: rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
 
 .progress-fill {
-  height: 100%;
+  width: 100%;
   background: white;
-  transition: width 0.1s ease-out;
+  position: absolute;
+  bottom: 0;
+  transition: height 0.1s ease-out;
 }
 
 .section-counter {
@@ -281,12 +288,79 @@ All colors MUST be HSL.
 }
 
 .content-section {
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 18vh;
+  padding-bottom: 12vh;
+  position: relative;
+}
+
+.pain-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px;
+  width: 100%;
+  margin-top: 16px;
+  justify-items: center;
+}
+
+.pain-card-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.alpha-subtitle {
+  font-size: 18px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 18px;
+  margin-bottom: 6px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.alpha-subtitle--body {
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  margin-bottom: 12px;
+}
+
+.pain-card {
+  width: 100%;
+  max-width: 240px;
+  min-height: 200px;
+  padding: 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(8, 8, 20, 0.55);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
+  gap: 10px;
+}
+
+.pain-card h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.pain-card p {
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.5;
+  font-size: 15px;
 }
 
 .hero-loading-overlay {
