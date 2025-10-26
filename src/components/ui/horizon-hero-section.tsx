@@ -6,6 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import { MorphingSquare } from '@/components/ui/morphing-square';
 import { HyperText } from '@/components/ui/hyper-text';
+import { TypingAnimation } from '@/components/ui/typing-animation';
+import { Activity, Brain, TimerReset, Workflow } from 'lucide-react';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
@@ -14,6 +16,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Camera position constant - all stars MUST be in front of this
 const CAMERA_Z = 100;
+
+const painPoints = [
+  {
+    title: 'Lagging Data',
+    body: "Signals arrive seconds late, so you're reacting to the past instead of the next move.",
+    icon: TimerReset
+  },
+  {
+    title: 'Noisy Indicators',
+    body: 'Stacks of conflicting indicators force you to guess which signal to trust.',
+    icon: Activity
+  },
+  {
+    title: 'Fragmented Workflow',
+    body: 'You pivot between chats, charts, and sheets instead of executing on one command deck.',
+    icon: Workflow
+  },
+  {
+    title: 'Too Complex',
+    body: 'Technical analysis feels like a maze of theories—hard to master, harder to execute fast.',
+    icon: Brain
+  }
+];
 
 // Utility function to create circular star texture for sprites
 const createStarTexture = (): THREE.CanvasTexture => {
@@ -629,6 +654,11 @@ export const Component = () => {
               Unlock real-time insights with OI, VDelta, and CVD.
             </p>
           </div>
+
+          <InteractiveHoverButton
+            text="Get Early Access"
+            className="mt-8 w-auto px-8 py-6 text-lg bg-[#FF6B6B] border-[#FF6B6B] hover:bg-[#FF5252]"
+          />
         </div>
       </div>
 
@@ -641,14 +671,11 @@ export const Component = () => {
             style={{ height: `${scrollProgress * 100}%` }}
           />
         </div>
-        <div className="section-counter">
-          {String(currentSection).padStart(2, '0')} / {String(totalSections).padStart(2, '0')}
-        </div>
       </div>
 
       {/* Additional sections for scrolling */}
       <div className="scroll-sections">
-       {[...Array(2)].map((_, i) => {
+        {[...Array(2)].map((_, i) => {
           const titles: Record<number, string> = {
             0: 'MARKET FLOW',
             1: 'ALPHALABS',
@@ -661,7 +688,7 @@ export const Component = () => {
               line2: ''
             },
             1: {
-              line1: 'Real-time analytics that give traders an edge',
+              line1: 'Real-time analytics that give traders an edge!',
               line2: ''
             },
             2: {
@@ -669,41 +696,46 @@ export const Component = () => {
               line2: 'Uncover hidden market trends with advanced analytics'
             }
           };
-          
+
           return (
             <section key={i} className="content-section">
-              <div className="flex flex-col items-center w-full px-4">
-                <h1 className="hero-title text-center w-full">
-                  {titles[i+1] === 'ALPHALABS' ? (
-                    <HyperText
-                      text="ALPHALABS"
-                      wrapperClassName="w-full justify-center"
-                      animateOnLoad
-                    />
-                  ) : (
-                    titles[i+1] || 'DEFAULT'
-                  )}
-                </h1>
-            
-                <div className="hero-subtitle cosmos-subtitle flex w-full flex-col items-center">
+              <div className="flex w-full flex-col items-center px-4">
+                <div className="flex w-full flex-col items-center justify-center gap-4">
+                  <h1 className="hero-title text-center w-full">
+                    {titles[i+1] === 'ALPHALABS' ? (
+                      <HyperText
+                        text="ALPHALABS"
+                        wrapperClassName="w-full justify-center"
+                        animateOnLoad
+                      />
+                    ) : (
+                      titles[i+1] || 'DEFAULT'
+                    )}
+                  </h1>
+                </div>
+
+                <div
+                  className={`hero-subtitle cosmos-subtitle flex w-full flex-col items-center ${
+                    i === 0 ? 'mt-48 md:mt-56 lg:mt-64' : ''
+                  }`}
+                >
                   {i === 0 ? (
                     <>
-                      <p className="subtitle-line subtitle-line--primary">
-                        {subtitles[i+1].line1}
-                      </p>
-                      <p className="subtitle-line subtitle-line--primary">
+                      <TypingAnimation
+                        text={subtitles[i+1].line1}
+                        duration={35}
+                        as="p"
+                        className="subtitle-line subtitle-line--primary subtitle-line--dimmed text-center"
+                      />
+                      <p className="subtitle-line subtitle-line--primary text-center">
                         {subtitles[i+1].line2}
                       </p>
-                      <p className="subtitle-line mt-2">
+                      <p className="subtitle-line mt-2 text-center">
                         Go beyond the surface.
                       </p>
-                      <p className="subtitle-line">
+                      <p className="subtitle-line text-center">
                         Uncover hidden market trends with advanced analytics.
                       </p>
-                      <InteractiveHoverButton 
-                        text="Get Early Access"
-                        className="mt-8 w-auto px-8 py-6 text-lg bg-[#FF6B6B] border-[#FF6B6B] hover:bg-[#FF5252]"
-                      />
                     </>
                   ) : (
                     <>
@@ -721,29 +753,15 @@ export const Component = () => {
                         Why trade with only technical analysis did not make you rich?
                       </p>
                       <div className="pain-card-grid">
-                      {[
-                        {
-                          title: "Lagging Data",
-                          body: "Signals arrive seconds late, so you’re reacting to the past instead of the next move.",
-                        },
-                        {
-                          title: "Noisy Indicators",
-                          body: "Stacks of conflicting indicators force you to guess which signal to trust.",
-                        },
-                        {
-                          title: "Fragmented Workflow",
-                          body: "You pivot between chats, charts, and sheets instead of executing on one command deck.",
-                        },
-                        {
-                          title: "Too Complex",
-                          body: "Technical analysis feels like a maze of theories—hard to master, harder to execute fast.",
-                        },
-                      ].map(({ title, body }) => (
-                        <div key={title} className="pain-card">
-                          <h4>{title}</h4>
-                          <p>{body}</p>
-                        </div>
-                      ))}
+                        {painPoints.map(({ title, body, icon: Icon }) => (
+                          <div key={title} className="pain-card">
+                            <div className="pain-card-icon">
+                              <Icon className="h-6 w-6" />
+                            </div>
+                            <h4>{title}</h4>
+                            <p>{body}</p>
+                          </div>
+                        ))}
                       </div>
                     </>
                   )}
@@ -752,8 +770,8 @@ export const Component = () => {
             </section>
           );
         })}
-      </div>
-
-    </div>
+      </div>\r\n\r\n    </div>
   );
 };
+
+
