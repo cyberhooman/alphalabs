@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
+import { MorphingSquare } from '@/components/ui/morphing-square';
+import { HyperText } from '@/components/ui/hyper-text';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
@@ -604,6 +606,15 @@ export const Component = () => {
 
   return (
     <div ref={containerRef} className="hero-container cosmos-style">
+      {!isReady && (
+        <div className="hero-loading-overlay">
+          <MorphingSquare
+            className="bg-[#FF6B6B]"
+            message="Preparing the cosmos"
+            messagePlacement="bottom"
+          />
+        </div>
+      )}
       <canvas ref={canvasRef} className="hero-canvas" />
       
       {/* Main content */}
@@ -663,7 +674,15 @@ export const Component = () => {
             <section key={i} className="content-section">
               <div className="flex flex-col items-center w-full px-4">
                 <h1 className="hero-title text-center w-full">
-                  {titles[i+1] || 'DEFAULT'}
+                  {titles[i+1] === 'ALPHALABS' ? (
+                    <HyperText
+                      text="ALPHALABS"
+                      wrapperClassName="w-full justify-center"
+                      animateOnLoad
+                    />
+                  ) : (
+                    titles[i+1] || 'DEFAULT'
+                  )}
                 </h1>
             
                 <div className="hero-subtitle cosmos-subtitle flex flex-col items-center">
