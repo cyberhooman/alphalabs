@@ -722,7 +722,7 @@ export const Component = () => {
 
                 <div
                   className={`hero-subtitle cosmos-subtitle flex w-full flex-col items-center ${
-                    i === 0 ? 'mt-48 md:mt-56 lg:mt-64' : ''
+                    i === 0 ? 'mt-40 md:mt-48 lg:mt-56' : ''
                   }`}
                 >
                   {i === 0 ? (
@@ -736,10 +736,10 @@ export const Component = () => {
                       <p className="subtitle-line subtitle-line--primary text-center">
                         {subtitles[i+1].line2}
                       </p>
-                      <p className="subtitle-line mt-2 text-center">
+                      <p className="subtitle-line text-center alpha-tagline">
                         Go beyond the surface.
                       </p>
-                      <p className="subtitle-line text-center">
+                      <p className="subtitle-line text-center alpha-tagline">
                         Uncover hidden market trends with advanced analytics.
                       </p>
                     </>
@@ -747,10 +747,10 @@ export const Component = () => {
                     <>
                       {titles[i+1] === 'ALPHALABS' && (
                         <div className="alpha-subtitle-block">
-                          <p className="subtitle-line">
+                          <p className="subtitle-line alpha-tagline">
                             Go beyond the surface
                           </p>
-                          <p className="subtitle-line">
+                          <p className="subtitle-line alpha-tagline">
                             Uncover hidden market trends with advanced analytics
                           </p>
                         </div>

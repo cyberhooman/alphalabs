@@ -273,6 +273,11 @@ All colors MUST be HSL.
   opacity: 0.8;
 }
 
+.alpha-tagline {
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
 .scroll-progress {
   position: fixed;
   top: 50%;
