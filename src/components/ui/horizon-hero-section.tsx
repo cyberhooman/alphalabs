@@ -11,6 +11,7 @@ import { Activity, Brain, TimerReset, Workflow } from 'lucide-react';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,6 +64,7 @@ const createStarTexture = (): THREE.CanvasTexture => {
 };
 
 export const Component = () => {
+  const navigate = useNavigate();
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const titleRef = useRef(null);
@@ -656,8 +658,9 @@ export const Component = () => {
           </div>
 
           <InteractiveHoverButton
-            text="Get Early Access"
+            text="Explore the Terminal!"
             className="mt-8 w-auto px-8 py-6 text-lg bg-[#FF6B6B] border-[#FF6B6B] hover:bg-[#FF5252]"
+            onClick={() => navigate('/early-access')}
           />
         </div>
       </div>

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import EarlyAccess from "./pages/EarlyAccess";
 import NotFound from "./pages/NotFound";
 import TestHero3D from "./pages/TestHero3D";
 
@@ -17,6 +18,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/early-access" element={<EarlyAccess />} />
           <Route path="/test-hero-3d" element={<TestHero3D />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
