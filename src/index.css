@@ -205,6 +205,23 @@ All colors MUST be HSL.
   text-shadow: 0 0 40px rgba(255, 107, 107, 0.8), 0 0 80px rgba(255, 107, 107, 0.6);
 }
 
+.alpha-hero-title {
+  position: relative;
+  top: 32px;
+}
+
+@media (min-width: 768px) {
+  .alpha-hero-title {
+    top: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .alpha-hero-title {
+    top: 60px;
+  }
+}
+
 .title-char {
   display: inline-block;
 }

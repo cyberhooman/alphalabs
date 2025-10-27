@@ -697,12 +697,18 @@ export const Component = () => {
             }
           };
 
+          const isAlphaSection = titles[i+1] === 'ALPHALABS';
+
           return (
             <section key={i} className="content-section">
               <div className="flex w-full flex-col items-center px-4">
                 <div className="flex w-full flex-col items-center justify-center gap-4">
-                  <h1 className="hero-title text-center w-full">
-                    {titles[i+1] === 'ALPHALABS' ? (
+                  <h1
+                    className={`hero-title text-center w-full ${
+                      isAlphaSection ? 'alpha-hero-title' : ''
+                    }`}
+                  >
+                    {isAlphaSection ? (
                       <HyperText
                         text="ALPHALABS"
                         wrapperClassName="w-full justify-center"
