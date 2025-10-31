@@ -7,6 +7,7 @@ import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button
 import { MorphingSquare } from '@/components/ui/morphing-square';
 import { HyperText } from '@/components/ui/hyper-text';
 import { TypingAnimation } from '@/components/ui/typing-animation';
+import { FloatingNav } from '@/components/ui/floating-navbar';
 import { Activity, Brain, TimerReset, Workflow } from 'lucide-react';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -631,8 +632,22 @@ export const Component = () => {
     ));
   };
 
+  const handleNavClick = (link: string) => {
+    if (link === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const element = document.getElementById(link);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div ref={containerRef} className="hero-container cosmos-style">
+      <FloatingNav onNavClick={handleNavClick} />
+
       {!isReady && (
         <div className="hero-loading-overlay">
           <MorphingSquare
@@ -779,7 +794,233 @@ export const Component = () => {
             </section>
           );
         })}
-      </div>\r\n\r\n    </div>
+      </div>
+
+      {/* Product Section */}
+      <section id="product" className="content-section bg-gradient-to-b from-transparent to-black/50">
+        <div className="mx-auto max-w-6xl px-6 py-20 text-white">
+          <div className="text-center space-y-3 mb-16">
+            <p className="text-sm uppercase tracking-[0.5em] text-[#FF6B6B]">
+              What's Inside
+            </p>
+            <h2 className="text-3xl font-semibold md:text-4xl">
+              Advanced Market Intelligence
+            </h2>
+            <p className="mx-auto max-w-3xl text-base text-zinc-400 md:text-lg">
+              Real-time Open Interest, Volume Delta, and Cumulative Volume Delta analytics
+              powered by institutional-grade data feeds and advanced algorithms.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-lg">
+              <div>
+                <p className="text-xs uppercase tracking-[0.5em] text-[#FF6B6B]">
+                  Real-Time
+                </p>
+                <h3 className="mt-2 text-xl font-semibold">Open Interest Analysis</h3>
+              </div>
+              <p className="text-sm text-zinc-400">
+                Track institutional positioning and smart money flows with real-time OI data
+                across all major markets and timeframes.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-lg">
+              <div>
+                <p className="text-xs uppercase tracking-[0.5em] text-[#FF6B6B]">
+                  Volume Delta
+                </p>
+                <h3 className="mt-2 text-xl font-semibold">VDelta & CVD</h3>
+              </div>
+              <p className="text-sm text-zinc-400">
+                Identify buyer vs seller dominance with volume delta and cumulative volume delta
+                indicators that reveal true market sentiment.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-lg">
+              <div>
+                <p className="text-xs uppercase tracking-[0.5em] text-[#FF6B6B]">
+                  Advanced
+                </p>
+                <h3 className="mt-2 text-xl font-semibold">Market Flow Terminal</h3>
+              </div>
+              <p className="text-sm text-zinc-400">
+                Comprehensive trading terminal combining all analytics, charts, and data feeds
+                in one unified command center.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="content-section bg-black/30">
+        <div className="mx-auto max-w-6xl px-6 py-20 text-white">
+          <div className="text-center space-y-3 mb-16">
+            <p className="text-sm uppercase tracking-[0.5em] text-[#FF6B6B]">
+              Pricing
+            </p>
+            <h2 className="text-3xl font-semibold md:text-4xl">
+              Early Access Pricing
+            </h2>
+            <p className="mx-auto max-w-3xl text-base text-zinc-400 md:text-lg">
+              Get exclusive access to AlphaLabs Market Flow Terminal.
+              Lock in your price now before public launch.
+            </p>
+          </div>
+
+          <div className="mx-auto w-full max-w-md">
+            <div className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-[#141428] via-[#0c0c1b] to-[#070714] p-8">
+              <div className="text-center">
+                <h3 className="text-2xl font-semibold">Early Access</h3>
+                <div className="mt-4">
+                  <span className="text-5xl font-bold text-[#FF6B6B]">Contact Us</span>
+                </div>
+                <p className="mt-2 text-sm text-zinc-400">for custom pricing</p>
+              </div>
+
+              <div className="space-y-3 border-t border-white/10 pt-6">
+                <div className="flex items-center gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Real-time OI Analysis</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">VDelta & CVD Indicators</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Market Flow Terminal</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Institutional Data Feeds</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Lifetime Updates</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Priority Support</span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => navigate('/early-access')}
+                className="mt-4 rounded-full bg-[#FF6B6B] px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.3em] text-black transition hover:bg-[#ff5252]"
+              >
+                Contact Sales
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Section */}
+      <section id="social" className="content-section bg-gradient-to-b from-black/30 to-black">
+        <div className="mx-auto max-w-6xl px-6 py-20 text-white">
+          <div className="text-center space-y-3 mb-16">
+            <p className="text-sm uppercase tracking-[0.5em] text-[#FF6B6B]">
+              Connect With Us
+            </p>
+            <h2 className="text-3xl font-semibold md:text-4xl">
+              Join Our Community
+            </h2>
+            <p className="mx-auto max-w-3xl text-base text-zinc-400 md:text-lg">
+              Follow us on social media for market insights, platform updates, and trading tips
+              from professional traders.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3 mb-12">
+            <a
+              href="https://twitter.com/alphalabs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-lg transition hover:bg-white/[0.08] hover:border-[#FF6B6B]/50"
+            >
+              <div className="flex items-center gap-3">
+                <svg className="h-8 w-8 text-[#FF6B6B]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+                <h3 className="text-xl font-semibold">Twitter</h3>
+              </div>
+              <p className="text-sm text-zinc-400">
+                Real-time market insights and platform updates
+              </p>
+            </a>
+
+            <a
+              href="https://discord.gg/alphalabs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-lg transition hover:bg-white/[0.08] hover:border-[#FF6B6B]/50"
+            >
+              <div className="flex items-center gap-3">
+                <svg className="h-8 w-8 text-[#FF6B6B]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+                <h3 className="text-xl font-semibold">Discord</h3>
+              </div>
+              <p className="text-sm text-zinc-400">
+                Join our community of professional traders
+              </p>
+            </a>
+
+            <a
+              href="https://github.com/alphalabs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-lg transition hover:bg-white/[0.08] hover:border-[#FF6B6B]/50"
+            >
+              <div className="flex items-center gap-3">
+                <svg className="h-8 w-8 text-[#FF6B6B]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <h3 className="text-xl font-semibold">GitHub</h3>
+              </div>
+              <p className="text-sm text-zinc-400">
+                Explore our open-source tools and contribute
+              </p>
+            </a>
+          </div>
+
+          <div className="flex flex-col items-center gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-[#141428] via-[#0c0c1b] to-[#070714] p-8 text-center">
+            <h3 className="text-2xl font-semibold">Stay Updated</h3>
+            <p className="max-w-2xl text-sm text-zinc-400">
+              Subscribe to our newsletter for exclusive trading insights, platform updates,
+              and early access to new features.
+            </p>
+            <div className="flex w-full max-w-md gap-3">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                className="flex-1 rounded-full border border-white/20 bg-black/40 px-6 py-3 text-sm text-white placeholder:text-zinc-500 focus:border-[#FF6B6B] focus:outline-none focus:ring-1 focus:ring-[#FF6B6B]"
+              />
+              <button className="rounded-full bg-[#FF6B6B] px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#ff5252]">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 };
 
