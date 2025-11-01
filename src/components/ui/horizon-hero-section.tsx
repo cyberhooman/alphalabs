@@ -801,55 +801,109 @@ export const Component = () => {
         <div className="mx-auto max-w-6xl px-6 py-20 text-white">
           <div className="text-center space-y-3 mb-16">
             <p className="text-sm uppercase tracking-[0.5em] text-[#FF6B6B]">
-              What's Inside
+              Our Products
             </p>
             <h2 className="text-3xl font-semibold md:text-4xl">
-              Advanced Market Intelligence
+              Professional Trading Terminals
             </h2>
             <p className="mx-auto max-w-3xl text-base text-zinc-400 md:text-lg">
-              Real-time Open Interest, Volume Delta, and Cumulative Volume Delta analytics
-              powered by institutional-grade data feeds and advanced algorithms.
+              Choose the terminal that fits your trading style. Both powered by institutional-grade data feeds and advanced algorithms.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-lg">
+          <div className="grid gap-8 md:grid-cols-2 mb-12">
+            {/* Crypto Terminal */}
+            <div className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-8 backdrop-blur-lg hover:border-[#FF6B6B]/50 transition-all duration-300">
               <div>
                 <p className="text-xs uppercase tracking-[0.5em] text-[#FF6B6B]">
-                  Real-Time
+                  Futures Trading
                 </p>
-                <h3 className="mt-2 text-xl font-semibold">Open Interest Analysis</h3>
+                <h3 className="mt-3 text-2xl font-bold">AlphaLabs Crypto Terminal</h3>
+                <p className="mt-4 text-base text-zinc-300">
+                  Real-time order flow, CVD, and market intelligence for crypto futures traders.
+                </p>
               </div>
-              <p className="text-sm text-zinc-400">
-                Track institutional positioning and smart money flows with real-time OI data
-                across all major markets and timeframes.
-              </p>
+
+              <div className="space-y-3 border-t border-white/10 pt-6">
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Real-time order flow and CVD analysis</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Open Interest and funding rate tracking</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Liquidation heatmaps and whale alerts</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Multi-exchange aggregated data</span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => navigate('/early-access')}
+                className="mt-4 rounded-full border-2 border-[#FF6B6B] px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.2em] text-[#FF6B6B] transition hover:bg-[#FF6B6B] hover:text-black"
+              >
+                Learn More
+              </button>
             </div>
 
-            <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-lg">
+            {/* Data Trading Terminal */}
+            <div className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-8 backdrop-blur-lg hover:border-[#FF6B6B]/50 transition-all duration-300">
               <div>
                 <p className="text-xs uppercase tracking-[0.5em] text-[#FF6B6B]">
-                  Volume Delta
+                  Forex & Data
                 </p>
-                <h3 className="mt-2 text-xl font-semibold">VDelta & CVD</h3>
+                <h3 className="mt-3 text-2xl font-bold">AlphaLabs Data Trading Terminal</h3>
+                <p className="mt-4 text-base text-zinc-300">
+                  Advanced forex analytics with currency strength meter and institutional feeds.
+                </p>
               </div>
-              <p className="text-sm text-zinc-400">
-                Identify buyer vs seller dominance with volume delta and cumulative volume delta
-                indicators that reveal true market sentiment.
-              </p>
-            </div>
 
-            <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-lg">
-              <div>
-                <p className="text-xs uppercase tracking-[0.5em] text-[#FF6B6B]">
-                  Advanced
-                </p>
-                <h3 className="mt-2 text-xl font-semibold">Market Flow Terminal</h3>
+              <div className="space-y-3 border-t border-white/10 pt-6">
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Real-time currency strength meter</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">MarketMilk™ integration for market snapshots</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">Professional trading journal with analytics</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <svg className="h-5 w-5 text-[#FF6B6B] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-sm text-zinc-300">FXCM institutional data feeds</span>
+                </div>
               </div>
-              <p className="text-sm text-zinc-400">
-                Comprehensive trading terminal combining all analytics, charts, and data feeds
-                in one unified command center.
-              </p>
+
+              <button
+                onClick={() => navigate('/early-access')}
+                className="mt-4 rounded-full border-2 border-[#FF6B6B] px-6 py-3 text-center text-sm font-semibold uppercase tracking-[0.2em] text-[#FF6B6B] transition hover:bg-[#FF6B6B] hover:text-black"
+              >
+                Learn More
+              </button>
             </div>
           </div>
         </div>
